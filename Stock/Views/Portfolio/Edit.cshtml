@@ -1,0 +1,44 @@
+﻿@model Stock.Models.Portfolio
+
+@{
+    ViewData["Title"] = "Портфели|Править";
+}
+
+<h4>Портфель</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PortfolioID" />
+            <div class="form-group">
+                <label asp-for="UserID" class="control-label"></label>
+                <select asp-for="UserID" class="form-control" asp-items="ViewBag.UserID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PortfolioName" class="control-label"></label>
+                <input asp-for="PortfolioName" class="form-control" />
+                <span asp-validation-for="PortfolioName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrokerID" class="control-label"></label>
+                <select asp-for="BrokerID" class="form-control" asp-items="ViewBag.BrokerID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrokerageAccountID" class="control-label"></label>
+                <select asp-for="BrokerageAccountID" class="form-control" asp-items="ViewBag.BrokerageAccountID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Вернуться к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

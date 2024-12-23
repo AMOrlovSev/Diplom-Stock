@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Stock.Models.VM.BrokerGroup>
+
+@{
+    ViewData["Title"] = "Информация";
+}
+
+<h1>Счета у брокеров</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BrokerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrokerCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrokerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrokerCount)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

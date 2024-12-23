@@ -1,0 +1,54 @@
+﻿@model Stock.Models.StockActive
+
+@{
+    ViewData["Title"] = "Активы|Удалить";
+}
+
+<h3>Уверены, что хотите удалить портфель?</h3>
+<div>
+    <h4>Актив</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Portfolio.PortfolioName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Portfolio.PortfolioName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SecID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SecID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StockInformation.ShortName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StockInformation.ShortName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StockInformation.StockPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StockInformation.StockPrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CostCurrent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CostCurrent)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-action="Index">Вернуться к списку</a>
+    </form>
+</div>

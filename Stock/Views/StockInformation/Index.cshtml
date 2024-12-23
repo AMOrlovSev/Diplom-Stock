@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Stock.Models.StockInformation>
+
+@{
+    ViewData["Title"] = "Акции";
+}
+
+<h1>Акции</h1>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <label>Тикер или Компания:  <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" /></label>
+            <input type="submit" value="Поиск" class="btn btn-primary"  @* class="btn btn-default" *@ /> |
+            <a asp-action="Index">Полный список</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-sm-3 text-center">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SecIDSortParm"]">@Html.DisplayNameFor(model => model.SecID)</a>
+            </th>
+            <th class="col-sm-3 text-center">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ShortNameSortParm"]">@Html.DisplayNameFor(model => model.ShortName)</a>
+            </th>
+            <th class="col-sm-3 text-center">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StockPriceSortParm"]">@Html.DisplayNameFor(model => model.StockPrice)</a>
+            </th>
+            <th class="col-sm-3 text-center">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ListLevelSortParm"]">@Html.DisplayNameFor(model => model.ListLevel)</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td class="col-sm-3 text-center">
+                @Html.DisplayFor(modelItem => item.SecID)
+            </td>
+                <td class="col-sm-3 text-center">
+                @Html.DisplayFor(modelItem => item.ShortName)
+            </td>
+                <td class="col-sm-3 text-center">
+                @Html.DisplayFor(modelItem => item.StockPrice)
+            </td>
+                <td class="col-sm-3 text-center">
+                @Html.DisplayFor(modelItem => item.ListLevel)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

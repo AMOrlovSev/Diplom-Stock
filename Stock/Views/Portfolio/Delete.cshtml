@@ -1,0 +1,36 @@
+﻿@model Stock.Models.Portfolio
+
+@{
+    ViewData["Title"] = "Портфели|Удалить";
+}
+
+<h3>Уверены, что хотите удалить портфель?</h3>
+<div>
+    <h4>Портфель</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PortfolioName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PortfolioName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BrokerID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Broker.BrokerName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BrokerageAccountID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BrokerageAccount.BrokerageAccountType)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-action="Index">Вернуться к списку</a>
+    </form>
+</div>

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Stock.Models.StockActive>
+
+@{
+    ViewData["Title"] = "Активы";
+}
+
+<h1>Активы</h1>
+
+@if (Context.User.Identity.Name != null)
+{
+<p>
+    <a asp-action="Create">Добавить новый</a>
+</p>
+
+
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            <label>Имя портфеля:  <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" /></label>
+            <input type="submit" value="Фильтр" class="btn btn-primary" @* class="btn btn-default" *@ /> |
+            <a asp-action="Index">Все</a>
+        </p>
+    </div>
+</form>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Portfolio.PortfolioName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockInformation.SecID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockInformation.ShortName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockInformation.StockPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostCurrent)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Portfolio.PortfolioName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockInformation.SecID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockInformation.ShortName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockInformation.StockPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CostCurrent)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.StockActiveID">Править</a> |
+                    <a asp-action="Details" asp-route-id="@item.StockActiveID">Сведения</a> |
+                    <a asp-action="Delete" asp-route-id="@item.StockActiveID">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Итого:</td>
+            <td>
+                @{
+                    decimal i = 0;
+                    @foreach (var item in Model)
+                    {
+                        i += item.CostCurrent;
+                    }
+                }
+                @i
+            </td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+}
+else
+{
+    <div>
+        Нет аккаунта? <a asp-controller="UserAccount" asp-action="Registration">Зарегистрируйтесь</a>
+    </div>
+    <div>
+        Уже есть аккаунт? <a asp-controller="UserAccount" asp-action="Login">Войти</a>
+    </div>
+}

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Stock.Models.Portfolio>
+
+@{
+    ViewData["Title"] = "Портфели";
+}
+
+<h1>Портфели</h1>
+
+@if (Context.User.Identity.Name != null)
+{
+    <p>
+        <a asp-action="Create">Добавить новый</a>
+    </p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class ="col-sm-3 text-center">
+                @Html.DisplayNameFor(model => model.PortfolioName)
+            </th>
+            <th class="col-sm-3 text-center">
+                @Html.DisplayNameFor(model => model.BrokerID)
+            </th>
+            <th class="col-sm-3 text-center">
+                @Html.DisplayNameFor(model => model.BrokerageAccountID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td class="col-sm-3 text-center">
+                @Html.DisplayFor(modelItem => item.PortfolioName)
+            </td>
+                <td class="col-sm-3 text-center">
+                @Html.DisplayFor(modelItem => item.Broker.BrokerName)
+            </td>
+                <td class="col-sm-3 text-center">
+                @Html.DisplayFor(modelItem => item.BrokerageAccount.BrokerageAccountType)
+            </td>
+                <td class="col-sm-3 text-center">
+                <a asp-action="Edit" asp-route-id="@item.PortfolioID">Править</a> |
+                <a asp-action="Details" asp-route-id="@item.PortfolioID">Сведения</a> |
+                <a asp-action="Delete" asp-route-id="@item.PortfolioID">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+}
+else
+{
+    <div>
+        Нет аккаунта? <a asp-controller="UserAccount" asp-action="Registration">Зарегистрируйтесь</a>
+    </div>
+    <div>
+        Уже есть аккаунт? <a asp-controller="UserAccount" asp-action="Login">Войти</a>
+    </div>
+}
